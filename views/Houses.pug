@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  - var Houses = [{house_name: "Maple Cottage", house_size: "Medium", house_price: 300000},{house_name: "Oak Manor", house_size: "Large", house_price: 500000},{house_name: "Pine Retreat", house_size: "Small", house_price: 200000}]
+  div(class="container-fluid")
+    div(class="row")
+      each House, index in Houses
+        div(class="col-sm-2" onclick=`buy(${index})`) #{House.house_name}, #{House.house_size}, #{House.house_price} $
+      script.
+        function buy(a) {
+          alert(`You purchased House ${a+1}`)
+        }
