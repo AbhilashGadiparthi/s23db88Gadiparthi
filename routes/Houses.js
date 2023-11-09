@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('Houses', { title: 'Search Results' });
 });
 
+var express = require('express');
+const Houses_controlers= require('../controllers/Houses');
+var router = express.Router();
+/* GET costumes */
+router.get('/', Houses_controlers.Houses_view_all_Page );
+module.exports = router;
+
 module.exports = router;

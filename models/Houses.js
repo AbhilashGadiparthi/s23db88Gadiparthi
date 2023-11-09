@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const HousesSchema = mongoose.Schema({
-Houses_type: String,
-size: String,
-cost: Number
+house_name: String,
+house_size: String,
+house_price: Number
 })
 module.exports = mongoose.model("Houses",HousesSchema)
