@@ -13,4 +13,6 @@ var router = express.Router();
 router.get('/', Houses_controlers.Houses_view_all_Page );
 module.exports = router;
 
+// GET request for one costume.
+router.get('/Houses/:id', Houses_controlers.Houses_detail);
 module.exports = router;
