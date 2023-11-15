@@ -12,4 +12,13 @@ a {
   width: 120px;
  }
  
+ #HousesForm {
+  background-color:rgb(73, 170, 255);
+  width: 325px;
+}
+
+h1{
+  color: rgb(235, 93, 155);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
  
