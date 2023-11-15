@@ -11,10 +11,18 @@ exports.Houses_detail = function(req, res) {
 exports.Houses_create_post = function(req, res) {
  res.send('NOT IMPLEMENTED: Houses create POST');
 };
-// Handle Houses delete form on DELETE.
-exports.Houses_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Houses delete DELETE ' + req.params.id);
-};
+ // Handle Costume delete on DELETE.
+   exports.Houses_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Houses.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   }
 // Handle Houses update form on PUT.
 exports.Houses_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Houses update PUT' + req.params.id);
@@ -98,3 +106,19 @@ exports.Houses_update_put = async function(req, res) {
    failed`);
     }
    };
+
+   // Handle a show one view with id specified by query
+exports.Houses_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Houses.findById( req.query.id)
+    res.render('Housesdetail', 
+   { title: 'Houses Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   }
+
+  

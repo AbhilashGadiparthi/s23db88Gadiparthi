@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  - let Housesid = toShow._id
+  - let Houseshouse_name = toShow.house_name
+  - let Houseshouse_size = toShow.house_size
+  - let Houseshouse_price = toShow.house_price
+  div
+    div.row
+      div(class='HousesAttr mr-4') Houses ID is:
+        div #{Housesid}
+        br
+    div.row
+      div(class='HousesAttr mr-4') Houses Taste is:
+        div #{Houseshouse_name}
+        br
+    div.row
+      div(class='HousesAttr mr-4') Houses Texture is:
+        div #{Houseshouse_size}
+        br
+    div.row
+      div(class='HousesAttr mr-4') Houses Temperature is:
+        div #{Houseshouse_price}
+        br
+
+  style.
+    .HousesAttr {
+      background-color: rgb(211, 241, 16);
+      width: 300px;
+    }

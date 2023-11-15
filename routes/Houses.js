@@ -16,3 +16,6 @@ module.exports = router;
 // GET request for one costume.
 router.get('/Houses/:id', Houses_controlers.Houses_detail);
 module.exports = router;
+
+/* GET detail costume page */
+router.get('/detail', Houses_controlers.Houses_view_one_Page);
