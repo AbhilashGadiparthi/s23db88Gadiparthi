@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let Housesid = toShow._id
+    - let Houseshouse_name = toShow.house_name
+    - let Houseshouse_size = toShow.house_size
+    - let Houseshouse_price = toShow.house_price
+    - let actionid = "/resource/Houses/" + Housesid
+
+    script.
+      let actionid = "#{actionid}"
+
+    div
+      div.row
+        div(class='HousesAttr mr-3') Houses ID is:
+        div #{Housesid}
+      div.row
+        div(class='HousesAttr mr-3') Houses Type is:
+        div #{Houseshouse_name}
+      div.row
+        div(class='HousesAttr mr-3') Houses Size is:
+        div #{Houseshouse_size}
+      div.row
+        div(class='HousesAttr mr-3') Houses Cost is:
+        div #{Houseshouse_price}
+      
+      button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+      script.
+        function cancel() {
+          // Go back to the home page for the costume collection
+          window.location.href='/Houses'
+        }
+
+      script.
+        function deleteOnid() {
+          console.log("starting delete")
+          // delete first
+          fetch(actionid, {
+            method: 'DELETE' // Don't need a body for the delete
+          }).then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+          }).then((body) => {
+            alert("Delete succeeded")
+            window.location.href='/costumes'
+            // TODO handle body
+          }).catch((error) => {
+            // TODO handle error
+            alert("Delete failed " + error)
+          });
+        }

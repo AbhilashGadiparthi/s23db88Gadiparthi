@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1= title
+  - let Housesid = toShow._id
+  - let Houseshouse_name = toShow.house_name
+  - let Houseshouse_size = toShow.house_size
+  - let Houseshouse_price = toShow.house_price
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{Housesid}
+    - let actionid = "/resource/Houses/" + Housesid
+    form(id='HousesForm', action=actionid, method="PUT")
+      div.form-group
+        label.HousesAttr(for='house_name') Houses name
+        input#house_name(type='text', name='house_name', value=Houseshouse_name)
+      div.form-group
+        label.HousesAttr(for='house_size') Costume size
+        input#house_size(type='text', name='house_size', value=Houseshouse_size)
+      div.form-group
+        label.HousesAttr(for='house_price') Costume cost
+        input#house_price(type='number', name='house_price', value=Houseshouse_price)
+      input(type="submit")
+    script.
+      document.forms['HousesForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show the user that the form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error);
+        });
+      });

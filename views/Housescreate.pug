@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1= title
+
+  form(id='HousesForm', action="/resource/Houses", method="POST")
+    div.form-group
+      label.HousesAttr(for='house_name') Houses house_name
+      input#house_name(type='text', name='house_name')
+
+    div.form-group
+      label.HousesAttr(for='house_size') Houses house_size
+      input#house_size(type='text', name='house_size')
+
+    div.form-group
+      label.HousesAttr(for='house_price') Houses house_price
+      input#house_price(type='number', name='house_price')
+
+    input(type="submit")
+
+  script.
+    document.forms['HousesForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO: do something here to show the user that the form is being submitted
+
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      })
+      .then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      })
+      .then((body) => {
+        alert("Save succeeded");
+        // TODO: handle the response body
+      })
+      .catch((error) => {
+        // TODO: handle the error
+        alert("Save failed " + error);
+      });
+    });
