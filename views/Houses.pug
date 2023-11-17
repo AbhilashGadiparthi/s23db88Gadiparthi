@@ -2,12 +2,19 @@ extends layout
 
 block content
   h1= title
-  - var Houses = [{house_name: "Maple Cottage", house_size: "Medium", house_price: 300000},{house_name: "Oak Manor", house_size: "Large", house_price: 500000},{house_name: "Pine Retreat", house_size: "Small", house_price: 200000}]
+  - let items = results
+  - var Houses = [{ house_name: "Maple Cottage", house_size: "Medium", house_price: 300000 },{ house_name: "Oak Manor", house_size: "Large", house_price: 500000 },{ house_name: "Pine Retreat", house_size: "Small", house_price: 200000 }]
   div(class="container-fluid")
-    div(class="row")
-      each House, index in Houses
-        div(class="col-sm-2" onclick=`buy(${index})`) #{House.house_name}, #{House.house_size}, #{House.house_price} $
-      script.
-        function buy(a) {
-          alert(`You purchased House ${a+1}`)
-        }
+    div(class="row m-1")
+      each item in items
+        - let destination = `/Houses/update?id=${item._id}`
+        div(class="row-sm-2 m-1")
+          | Item #{item.house_name} (#{item.house_size}) is #{item.house_price} $
+          button.btn(class="btn-primary ml-1", onclick=`dispatch('${destination}')`) Update
+  script.
+    function buy(a) {
+      alert(`You purchased House ${a+1}`);
+    }
+    function dispatch(path) {
+      window.location.href = path;
+    }
