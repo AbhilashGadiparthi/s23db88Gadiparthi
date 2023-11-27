@@ -19,12 +19,17 @@ module.exports = router;
 
 /* GET detail costume page */
 router.get('/detail', Houses_controlers.Houses_view_one_Page);
-
+const secured = (req, res, next) => {
+  if (req.user){
+  return next();
+  }
+  res.redirect("/login");
+  }
 /* GET create costume page */
 router.get('/create', Houses_controlers.Houses_create_Page);
 
 /* GET create update page */
-router.get('/update', Houses_controlers.Houses_update_Page);
+router.get('/update',secured, Houses_controlers.Houses_update_Page);
 
 /* GET delete costume page */
 router.get('/delete', Houses_controlers.Houses_delete_Page);
