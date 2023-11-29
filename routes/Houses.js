@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+const secured = (req, res, next) => {
+  if (req.user){
+  return next();
+  }
+  res.redirect("/login");
+  }
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('Houses', { title: 'Search Results' });
@@ -18,18 +25,12 @@ router.get('/Houses/:id', Houses_controlers.Houses_detail);
 module.exports = router;
 
 /* GET detail costume page */
-router.get('/detail', Houses_controlers.Houses_view_one_Page);
-const secured = (req, res, next) => {
-  if (req.user){
-  return next();
-  }
-  res.redirect("/login");
-  }
+router.get('/detail',secured, Houses_controlers.Houses_view_one_Page);
 /* GET create costume page */
-router.get('/create', Houses_controlers.Houses_create_Page);
+router.get('/create',secured, Houses_controlers.Houses_create_Page);
 
 /* GET create update page */
 router.get('/update',secured, Houses_controlers.Houses_update_Page);
 
 /* GET delete costume page */
-router.get('/delete', Houses_controlers.Houses_delete_Page);
+router.get('/delete',secured, Houses_controlers.Houses_delete_Page);

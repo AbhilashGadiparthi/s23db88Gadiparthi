@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   - let items = results
+  a(class="btn btn-success" href="/Houses/create") Create
   - var Houses = [{ house_name: "Maple Cottage", house_size: "Medium", house_price: 300000 },{ house_name: "Oak Manor", house_size: "Large", house_price: 500000 },{ house_name: "Pine Retreat", house_size: "Small", house_price: 200000 }]
   div(class="container-fluid")
     div(class="row m-1")
@@ -11,6 +12,8 @@ block content
         div(class="row-sm-2 m-1")
           | Item #{item.house_name} (#{item.house_size}) is #{item.house_price} $
           button.btn(class="btn-primary ml-1", onclick=`dispatch('${destination}')`) Update
+          a(class="btn btn-danger" href=`/Houses/delete?id=${item._id}`) Delete
+          a(class="btn btn-dark" href=`/Houses/detail?id=${item._id}`) Details
   script.
     function buy(a) {
       alert(`You purchased House ${a+1}`);
